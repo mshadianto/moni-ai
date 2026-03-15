@@ -1,0 +1,30 @@
+# Secrets - NEVER commit these
+*.env
+.env.*
+auth-profiles.json
+credentials/
+secrets/
+
+# API Keys
+*api_key*
+*apikey*
+*API_KEY*
+
+# OpenClaw runtime
+sessions/
+memory/
+*.sqlite
+*.log
+*.lock
+
+# Node
+node_modules/
+.npm/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+backups/
