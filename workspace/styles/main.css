@@ -4,7 +4,14 @@
  */
 
 /* ── Reset & Base ─────────────────────────────────────────── */
+/* Fallback: load Google Fonts if available, degrade to system monospace */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+
+@font-face {
+  font-family: 'Orbitron-Fallback';
+  src: local('Consolas'), local('Menlo'), local('Monaco');
+  font-weight: 400 900;
+}
 
 :root {
   --neon: #00ff9f;
@@ -16,8 +23,8 @@
   --gold: #ffd93d;
   --orange: #ff922b;
   --blue: #4d96ff;
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
-  --font-display: 'Orbitron', sans-serif;
+  --font-mono: 'Share Tech Mono', 'Consolas', 'Courier New', monospace;
+  --font-display: 'Orbitron', 'Orbitron-Fallback', 'Consolas', monospace;
   --hud-bg: rgba(10, 6, 18, 0.85);
   --hud-border: rgba(0, 255, 159, 0.2);
   --hud-border-bright: rgba(0, 255, 159, 0.5);
