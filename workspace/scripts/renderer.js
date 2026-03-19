@@ -45,7 +45,8 @@ class RenderPipeline {
     this._renderer.shadowMap.enabled = true;
     this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this._renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this._renderer.toneMappingExposure = CONFIG.RENDERER.TONE_MAPPING_EXPOSURE;
+    this._renderer.toneMappingExposure = 1.4;
+    this._renderer.shadowMap.autoUpdate = true;
 
     window.addEventListener('resize', this._onResize.bind(this));
 

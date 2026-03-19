@@ -25,16 +25,18 @@
   --blue: #4d96ff;
   --font-mono: 'Share Tech Mono', 'Consolas', 'Courier New', monospace;
   --font-display: 'Orbitron', 'Orbitron-Fallback', 'Consolas', monospace;
-  --hud-bg: rgba(10, 6, 18, 0.85);
-  --hud-border: rgba(0, 255, 159, 0.2);
-  --hud-border-bright: rgba(0, 255, 159, 0.5);
-  --panel-radius: 2px;
+  --hud-bg: rgba(3, 1, 8, 0.75);
+  --hud-bg-solid: rgba(5, 2, 14, 0.92);
+  --hud-border: rgba(0, 255, 159, 0.12);
+  --hud-border-bright: rgba(0, 255, 159, 0.35);
+  --panel-radius: 3px;
+  --glass-blur: 12px;
   --scanline: repeating-linear-gradient(
     0deg,
     transparent,
-    transparent 2px,
-    rgba(0, 255, 159, 0.015) 2px,
-    rgba(0, 255, 159, 0.015) 4px
+    transparent 3px,
+    rgba(0, 255, 159, 0.008) 3px,
+    rgba(0, 255, 159, 0.008) 6px
   );
 }
 
@@ -120,14 +122,16 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 24px;
   background: linear-gradient(
     180deg,
-    var(--hud-bg) 0%,
-    rgba(10, 6, 18, 0.6) 80%,
+    var(--hud-bg-solid) 0%,
+    rgba(3, 1, 8, 0.5) 70%,
     transparent 100%
   );
   border-bottom: 1px solid var(--hud-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .hud-top::after {
@@ -227,12 +231,14 @@ html, body {
   left: 8px;
   bottom: 140px;
   width: 220px;
-  background: var(--hud-bg);
+  background: var(--hud-bg-solid);
   border: 1px solid var(--hud-border);
   border-radius: var(--panel-radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .hud-left::before {
@@ -385,12 +391,14 @@ html, body {
   left: 8px;
   right: 8px;
   height: 120px;
-  background: var(--hud-bg);
+  background: var(--hud-bg-solid);
   border: 1px solid var(--hud-border);
   border-radius: var(--panel-radius);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .hud-bottom::before {
@@ -488,20 +496,23 @@ html, body {
 }
 
 .modal-panel {
-  background: var(--hud-bg);
+  background: var(--hud-bg-solid);
   border: 1px solid var(--hud-border-bright);
   border-radius: var(--panel-radius);
-  width: 420px;
+  width: 440px;
   max-width: 90vw;
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
-  transform: translateY(20px) scale(0.95);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(30px) scale(0.92);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow:
-    0 0 30px rgba(0, 255, 159, 0.08),
-    0 0 60px rgba(0, 255, 159, 0.04),
-    inset 0 1px 0 rgba(0, 255, 159, 0.1);
+    0 0 40px rgba(0, 255, 159, 0.06),
+    0 0 80px rgba(0, 255, 159, 0.03),
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(0, 255, 159, 0.08);
 }
 
 .agent-modal.visible .modal-panel {
