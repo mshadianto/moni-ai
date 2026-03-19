@@ -44,7 +44,8 @@ class RenderPipeline {
     this._renderer.setPixelRatio(Math.min(window.devicePixelRatio, CONFIG.RENDERER.MAX_PIXEL_RATIO));
     this._renderer.shadowMap.enabled = true;
     this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    this._renderer.toneMapping = THREE.NoToneMapping;
+    this._renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this._renderer.toneMappingExposure = 1.3;
     this._renderer.shadowMap.autoUpdate = true;
 
     window.addEventListener('resize', this._onResize.bind(this));
