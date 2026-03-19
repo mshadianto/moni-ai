@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MONI 3D WORKSPACE — Agent Command Center</title>
+  <meta name="description" content="3D visual workspace for MONI AI multi-agent system">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Boot Sequence -->
+  <div class="boot-overlay">
+    <div class="boot-text">INITIALIZING MONI 3D WORKSPACE v1.0 ...</div>
+  </div>
+
+  <!-- 3D Canvas -->
+  <canvas id="scene-canvas"></canvas>
+
+  <!-- Post-processing Overlays -->
+  <div class="scanline-overlay"></div>
+  <div class="vignette"></div>
+
+  <!-- Corner Decorations -->
+  <div class="corner-tl"></div>
+  <div class="corner-tr"></div>
+  <div class="corner-bl"></div>
+  <div class="corner-br"></div>
+
+  <!-- HUD -->
+  <div class="hud">
+
+    <!-- Top Bar: Title + Stats + Clock -->
+    <div class="hud-top">
+      <div id="hud-title" style="min-width: 200px;">&nbsp;</div>
+
+      <div class="hud-stats">
+        <div class="stat-item">
+          <span class="stat-value" id="stat-agents">0</span>
+          <span class="stat-label">AGENTS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-active">0</span>
+          <span class="stat-label">ACTIVE</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-tasks">0</span>
+          <span class="stat-label">TASKS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-uptime">—</span>
+          <span class="stat-label">UPTIME</span>
+        </div>
+      </div>
+
+      <div class="hud-clock-section">
+        <span id="hud-clock">00:00:00</span>
+        <button class="btn-reset" id="reset-camera" title="Reset camera to overview">OVERVIEW</button>
+      </div>
+    </div>
+
+    <!-- Left Panel: Agent List -->
+    <div class="hud-left">
+      <div class="panel-header">AGENT FLEET</div>
+      <div id="agent-list"></div>
+    </div>
+
+    <!-- Bottom Panel: Activity Feed -->
+    <div class="hud-bottom">
+      <div class="panel-header">LIVE ACTIVITY</div>
+      <div id="activity-feed"></div>
+    </div>
+
+  </div>
+
+  <!-- Agent Detail Modal -->
+  <div class="agent-modal" id="agent-modal">
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" title="Close">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Main Script -->
+  <script type="module" src="scripts/main.js"></script>
+
+</body>
+</html>
