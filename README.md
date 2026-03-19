@@ -9,52 +9,134 @@ MONI is a production-grade AI command center running on [OpenClaw](https://githu
 - **Sharia-compliant portfolio monitoring** with real-time market data
 - **Doctoral research support** for AI governance frameworks
 - **Multi-channel communication** via Telegram & WhatsApp
+- **3D Visual Workspace** for real-time agent monitoring
 
 Built by [MS Hadianto](https://github.com/mshadianto) — GRC Expert, AI-Powered Builder.
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────┐
-│              MONI AI System                  │
-├─────────────────────────────────────────────┤
-│                                              │
-│  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐    │
-│  │ MONI │  │FALAH │  │AURIX │  │BAYAN │    │
-│  │ Main │  │Portf.│  │Audit │  │Resrch│    │
-│  └──┬───┘  └──┬───┘  └──┬───┘  └──┬───┘    │
-│     └─────────┴─────────┴─────────┘         │
-│                    │                         │
-│  ┌─────────────────┴──────────────────┐     │
-│  │         OpenClaw Gateway            │     │
-│  │         v2026.3.12                  │     │
-│  └─────────────────┬──────────────────┘     │
-│                    │                         │
-│  ┌────────┐  ┌────────┐  ┌────────┐         │
-│  │Telegram│  │WhatsApp│  │WebChat │         │
-│  └────────┘  └────────┘  └────────┘         │
-│                                              │
-│  ┌──────────────────────────────────┐       │
-│  │  🏢 Claw3D — 3D Visual Workspace │       │
-│  │  Agents → Office → Real-Time     │       │
-│  └──────────────────────────────────┘       │
-│                                              │
-│  Models: ZAI/GLM-5 + SumoPod (Claude/GPT)  │
-│  Search: Tavily | Memory: Voyage AI          │
-│  Security: Fail2ban + Tailscale              │
-└─────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                    MONI AI System                         │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐                   │
+│  │ MONI │ │FALAH │ │AURIX │ │BAYAN │  ← 4 Core Agents  │
+│  │ CEO  │ │ COO  │ │ CTO  │ │Resrch│                   │
+│  └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘                   │
+│     │        │        │        │                         │
+│  ┌──┴───┐ ┌──┴───┐ ┌──┴──┐ ┌──┴───┐ ┌──────┐          │
+│  │TAKWA │ │AMANAH│ │HIKM.│ │BASYR.│ │NIZAM │           │
+│  │ GRC  │ │ Inv. │ │ R&D │ │Intel │ │ Ops  │           │
+│  └──────┘ └──────┘ └─────┘ └──────┘ └──────┘           │
+│  ┌──────┐ ┌──────┐ ┌──────┐                             │
+│  │ AMAN │ │RA'IS │ │WASIT │ ← 12 Agents Total          │
+│  │ Sec. │ │ QA   │ │Coord.│ + MUHTASIB (Compliance)    │
+│  └──────┘ └──────┘ └──────┘                             │
+│                    │                                     │
+│  ┌─────────────────┴──────────────────┐                 │
+│  │         OpenClaw Gateway            │                 │
+│  │         v2026.3.12                  │                 │
+│  └─────────────────┬──────────────────┘                 │
+│                    │                                     │
+│  ┌────────┐  ┌────────┐  ┌────────┐                     │
+│  │Telegram│  │WhatsApp│  │WebChat │                     │
+│  └────────┘  └────────┘  └────────┘                     │
+│                                                          │
+│  ┌──────────────────────────────────────────────┐       │
+│  │  🏢 3D Workspace (Three.js)                   │       │
+│  │  GTA-style open world │ Interactive agents    │       │
+│  │  Real-time HUD │ WebSocket-ready              │       │
+│  └──────────────────────────────────────────────┘       │
+│                                                          │
+│  Models: ZAI/GLM-5 + SumoPod (Claude/GPT)              │
+│  Search: Tavily | Memory: Voyage AI                      │
+│  Security: Fail2ban + Tailscale                          │
+└──────────────────────────────────────────────────────────┘
 ```
 
-## Agents
+## 12 AI Agents
 
-| Agent | Role | Default Model | Emoji |
-|-------|------|---------------|-------|
-| **MONI** | GRC Command Center | zai/glm-5 | 🔍 |
-| **FALAH** | Sharia Portfolio Advisor | claude-sonnet-4-6 | 💰 |
-| **AURIX** | Audit & Fraud Detection | claude-opus-4-6 | 🔬 |
-| **BAYAN** | Doctoral Research | claude-opus-4-6 | 📚 |
+### Executive Floor (C-Suite)
+| Agent | Title | Role | Model | Emoji |
+|-------|-------|------|-------|-------|
+| **MONI** | CEO | GRC Command Center | zai/glm-5 | 🔍 |
+| **FALAH** | COO | Sharia Portfolio Advisor | claude-sonnet-4-6 | 💰 |
+| **AURIX** | CTO | Audit & Fraud Detection | claude-opus-4-6 | 🔬 |
 
-## Skills (25+)
+### Director Row
+| Agent | Title | Role | Model | Emoji |
+|-------|-------|------|-------|-------|
+| **TAKWA** | GRC Director | Regulatory Compliance | zai/glm-5 | ⚖️ |
+| **AMANAH** | Investment Director | Portfolio Intelligence | claude-sonnet-4-6 | 📊 |
+| **HIKMAH** | Technology Director | Research & Development | claude-opus-4-6 | 🧠 |
+| **BASYAR** | Intelligence Director | Competitive Intelligence | zai/glm-5 | 🕵️ |
+
+### Team Leads
+| Agent | Title | Role | Model | Emoji |
+|-------|-------|------|-------|-------|
+| **NIZAM** | Operations Lead | System Operations | zai/glm-4.7 | ⚙️ |
+| **AMAN** | Security Lead | Security Hardening | zai/glm-5 | 🛡️ |
+| **RA'IS** | Oversight Lead | Quality Assurance | claude-sonnet-4-6 | 👁️ |
+| **WASIT** | Mediator Lead | Agent Coordination | zai/glm-4.7 | 🤝 |
+| **MUHTASIB** | Compliance Lead | Audit Trail | claude-sonnet-4-6 | 📋 |
+
+## 3D Workspace
+
+The MONI 3D Workspace is a **GTA-style interactive environment** built with Three.js where all 12 agents are visualized in a photorealistic open-world corporate compound.
+
+### Features
+- **GTA Realistic 4K** — Golden hour lighting, glass skyscraper HQ, distant city skyline
+- **12 Interactive Agents** — Click any character to view full agent dossier
+- **Cinematic Camera** — Orbit controls with smooth fly-to animation on agent select
+- **Real-time HUD** — Agent fleet panel, live activity feed, performance stats, FPS counter
+- **Agent Dossier Modal** — Full-width panel with metrics, activity history, system info
+- **Modular Architecture** — Event bus, render pipeline, WebSocket-ready for live gateway data
+- **Adaptive Quality** — Auto-scales pixel ratio and shadows based on FPS
+
+### Tech Stack
+- **Three.js r160** — 3D engine (bundled locally, no CDN required)
+- **OrbitControls** — Camera navigation
+- **ES6 Modules** — Clean modular architecture
+- **Vanilla CSS** — Glassmorphism HUD panels
+
+### Run the 3D Workspace
+```bash
+cd workspace
+bash start.sh
+# Open http://127.0.0.1:8080
+```
+
+### Module Architecture
+```
+workspace/
+├── index.html              # Full-screen canvas + HUD overlays
+├── styles/main.css         # GTA-themed dark HUD with neon accents
+├── start.sh                # Static server (Node.js or Python)
+├── lib/
+│   ├── three.module.js     # Three.js r160 (bundled)
+│   └── OrbitControls.js    # Camera controls (bundled)
+└── scripts/
+    ├── config.js           # Centralized parameters (scene, camera, perf)
+    ├── events.js           # Pub/sub event bus (decouples all modules)
+    ├── agents.js           # Agent registry + activity feed templates
+    ├── renderer.js         # Render pipeline + adaptive quality scaling
+    ├── websocket.js        # Gateway connection + simulation fallback
+    ├── office.js           # 3D scene (building, characters, props, lighting)
+    └── main.js             # HUD controller + orchestrator
+```
+
+## Claw3D Integration
+
+MONI also integrates with [Claw3D](https://github.com/iamlukethedev/Claw3D) (git submodule) for OpenClaw gateway-connected 3D visualization.
+
+```bash
+bash scripts/setup-claw3d.sh
+cd claw3d && npm run dev
+# Open http://localhost:3000
+```
+
+## Skills (26)
 
 ### Core
 - `chain-of-thought` — Structured thinking protocol
@@ -94,6 +176,9 @@ Built by [MS Hadianto](https://github.com/mshadianto) — GRC Expert, AI-Powered
 - `auto-maintenance` — Self-maintenance protocol
 - `backup-manager` — Config & data backup
 
+### Workspace
+- `claw3d-workspace` — 3D visual workspace integration
+
 ## Quick Start
 
 ### Prerequisites
@@ -108,62 +193,28 @@ Built by [MS Hadianto](https://github.com/mshadianto) — GRC Expert, AI-Powered
 git clone https://github.com/mshadianto/moni-ai.git
 cd moni-ai
 
-# Copy skills to OpenClaw workspace
+# Run installer (copies skills, SOUL.md, optionally sets up Claw3D)
+bash scripts/install.sh
+
+# Or manually:
 cp -r skills/* ~/.openclaw/workspace/skills/
-
-# Copy SOUL.md
 cp SOUL.md ~/.openclaw/workspace/SOUL.md
-
-# Copy agent configs (edit with your own API keys)
 cp config/openclaw-sample.json ~/.openclaw/openclaw.json
-
-# Restart gateway
 openclaw gateway restart
 ```
 
-### Environment Variables (set in ~/.bash_profile)
+### Environment Variables
 ```bash
 export TAVILY_API_KEY="tvly-your-key"
 export VOYAGE_API_KEY="pa-your-key"
 export GITHUB_TOKEN="ghp_your-token"
 ```
 
-## Claw3D — 3D Visual Workspace
-
-MONI integrates with [Claw3D](https://github.com/iamlukethedev/Claw3D), a 3D visual workspace that turns your AI agents into visible workers in a retro office environment.
-
-```
-┌─────────────────────────────────────────────────┐
-│                 Claw3D Studio                    │
-│  ┌───────────┐  ┌───────────┐  ┌───────────┐   │
-│  │  /agents   │  │  /office   │  │  /builder  │   │
-│  │  Fleet     │  │  3D Retro  │  │  Layout    │   │
-│  │  Manager   │  │  Office    │  │  Editor    │   │
-│  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘   │
-│        └──────────────┬──────────────┘           │
-│                       │ WebSocket                │
-│              ┌────────┴────────┐                 │
-│              │ OpenClaw Gateway │                 │
-│              └────────┬────────┘                 │
-│     ┌────────┬────────┼────────┐                 │
-│   MONI    FALAH    AURIX    BAYAN               │
-└─────────────────────────────────────────────────┘
-```
-
-### Setup Claw3D
+### Run 3D Workspace
 ```bash
-bash scripts/setup-claw3d.sh
-cd claw3d && npm run dev
-# Open http://localhost:3000
+cd workspace && bash start.sh
+# Open http://127.0.0.1:8080
 ```
-
-### Agent Desk Assignments
-| Agent | Room | Function |
-|-------|------|----------|
-| MONI | Command Center | GRC oversight & coordination |
-| FALAH | Trading Desk | Portfolio monitoring & alerts |
-| AURIX | Audit Room | Fraud detection & audit findings |
-| BAYAN | Research Lab | Doctoral research & literature |
 
 ## Models
 
@@ -179,14 +230,6 @@ cd claw3d && npm run dev
 - **Tailscale**: VPN mesh network for secure remote access
 - **API Key rotation**: Regular key regeneration protocol
 - **Loopback binding**: Gateway only accessible locally
-
-## Methodology
-
-> *"Curious → Coding → Deploy → Repeat"*
->
-> *"Domain expertise + AI tools = results"*
-
-MONI is built using AI as co-pilot, not traditional programming. Every skill and configuration is the result of iterative refinement through actual daily use.
 
 ## Author
 
