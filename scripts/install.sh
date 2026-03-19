@@ -31,3 +31,11 @@ echo "✅ Gateway restarted"
 echo ""
 echo "🎉 MONI AI installed!"
 echo "Test: send a message to your Telegram/WhatsApp bot"
+echo ""
+
+# Optional: Claw3D 3D Workspace
+read -p "🏢 Install Claw3D 3D workspace? (y/N) " -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    bash "$(dirname "$0")/setup-claw3d.sh"
+fi

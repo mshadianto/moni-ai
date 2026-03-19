@@ -34,6 +34,11 @@ Built by [MS Hadianto](https://github.com/mshadianto) — GRC Expert, AI-Powered
 │  │Telegram│  │WhatsApp│  │WebChat │         │
 │  └────────┘  └────────┘  └────────┘         │
 │                                              │
+│  ┌──────────────────────────────────┐       │
+│  │  🏢 Claw3D — 3D Visual Workspace │       │
+│  │  Agents → Office → Real-Time     │       │
+│  └──────────────────────────────────┘       │
+│                                              │
 │  Models: ZAI/GLM-5 + SumoPod (Claude/GPT)  │
 │  Search: Tavily | Memory: Voyage AI          │
 │  Security: Fail2ban + Tailscale              │
@@ -122,6 +127,43 @@ export TAVILY_API_KEY="tvly-your-key"
 export VOYAGE_API_KEY="pa-your-key"
 export GITHUB_TOKEN="ghp_your-token"
 ```
+
+## Claw3D — 3D Visual Workspace
+
+MONI integrates with [Claw3D](https://github.com/iamlukethedev/Claw3D), a 3D visual workspace that turns your AI agents into visible workers in a retro office environment.
+
+```
+┌─────────────────────────────────────────────────┐
+│                 Claw3D Studio                    │
+│  ┌───────────┐  ┌───────────┐  ┌───────────┐   │
+│  │  /agents   │  │  /office   │  │  /builder  │   │
+│  │  Fleet     │  │  3D Retro  │  │  Layout    │   │
+│  │  Manager   │  │  Office    │  │  Editor    │   │
+│  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘   │
+│        └──────────────┬──────────────┘           │
+│                       │ WebSocket                │
+│              ┌────────┴────────┐                 │
+│              │ OpenClaw Gateway │                 │
+│              └────────┬────────┘                 │
+│     ┌────────┬────────┼────────┐                 │
+│   MONI    FALAH    AURIX    BAYAN               │
+└─────────────────────────────────────────────────┘
+```
+
+### Setup Claw3D
+```bash
+bash scripts/setup-claw3d.sh
+cd claw3d && npm run dev
+# Open http://localhost:3000
+```
+
+### Agent Desk Assignments
+| Agent | Room | Function |
+|-------|------|----------|
+| MONI | Command Center | GRC oversight & coordination |
+| FALAH | Trading Desk | Portfolio monitoring & alerts |
+| AURIX | Audit Room | Fraud detection & audit findings |
+| BAYAN | Research Lab | Doctoral research & literature |
 
 ## Models
 

@@ -1,0 +1,3 @@
+[submodule "claw3d"]
+	path = claw3d
+	url = https://github.com/iamlukethedev/Claw3D.git

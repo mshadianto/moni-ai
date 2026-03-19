@@ -33,5 +33,23 @@
     "install": {
       "nodeManager": "bun"
     }
+  },
+  "studio": {
+    "NOTE": "Claw3D Studio settings — 3D visual workspace for agent monitoring",
+    "enabled": true,
+    "port": 3000,
+    "gatewayUrl": "ws://localhost:18789",
+    "features": {
+      "office3d": true,
+      "officeBuilder": true,
+      "agentChat": true,
+      "approvals": true
+    },
+    "deskAssignments": {
+      "moni": "command-center",
+      "falah": "trading-desk",
+      "aurix": "audit-room",
+      "bayan": "research-lab"
+    }
   }
 }

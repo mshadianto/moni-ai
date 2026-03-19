@@ -28,3 +28,7 @@ Thumbs.db
 # Backup files
 *.bak
 backups/
+
+# Claw3D
+claw3d/.env
+claw3d/node_modules/
