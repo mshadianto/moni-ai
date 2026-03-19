@@ -64,9 +64,12 @@ function init() {
     typeWriter(`${CONFIG.APP_NAME} v${CONFIG.VERSION}`, hudTitle, 0, CONFIG.HUD.TYPING_SPEED);
 
     bus.emit(EVENTS.APP_READY);
-    console.log(`[MONI] Workspace v${CONFIG.VERSION} ready — ${registry.count} agents loaded`);
+    console.log(`%c[MONI] Workspace v${CONFIG.VERSION} ready — ${registry.count} agents loaded`, 'color: #00ff9f; font-weight: bold');
+    console.log(`[MONI] Scene objects: ${registry.count} agents`);
+    console.log(`[MONI] Renderer: ${renderPipeline.quality} quality, ${renderPipeline.fps} FPS`);
+    console.log(`[MONI] Canvas: ${canvas?.width}x${canvas?.height}`);
   } catch (err) {
-    console.error('[MONI] Init failed:', err);
+    console.error('%c[MONI] Init failed:', 'color: #ff4757; font-weight: bold', err);
     bus.emit(EVENTS.APP_ERROR, { error: err.message });
     showError(err.message);
   }

@@ -74,6 +74,7 @@ class RenderPipeline {
     if (this._running) return;
     this._running = true;
     this._lastFrameTime = performance.now();
+    console.log('[Renderer] Starting render loop —', this._callbacks.size, 'frame callbacks registered');
     this._loop();
   }
 
