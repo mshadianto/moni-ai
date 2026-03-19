@@ -38,26 +38,28 @@ export function initScene(canvas) {
 
   scene = new THREE.Scene();
 
-  // GTA night sky gradient
+  // GTA golden hour sky gradient — bright & warm
   const skyCanvas = document.createElement('canvas');
   skyCanvas.width = 2;
   skyCanvas.height = 512;
   const ctx = skyCanvas.getContext('2d');
   const grad = ctx.createLinearGradient(0, 0, 0, 512);
-  grad.addColorStop(0, '#050510');
-  grad.addColorStop(0.3, '#0a0a2e');
-  grad.addColorStop(0.5, '#1a0a3e');
-  grad.addColorStop(0.7, '#2d1b4e');
-  grad.addColorStop(0.85, '#4a1942');
-  grad.addColorStop(0.95, '#ff4500');
-  grad.addColorStop(1.0, '#ff6b35');
+  grad.addColorStop(0, '#4a90d9');
+  grad.addColorStop(0.2, '#6db3f2');
+  grad.addColorStop(0.4, '#87ceeb');
+  grad.addColorStop(0.55, '#b8d4e8');
+  grad.addColorStop(0.7, '#f0c987');
+  grad.addColorStop(0.82, '#f5a623');
+  grad.addColorStop(0.9, '#ff7043');
+  grad.addColorStop(0.95, '#ff5722');
+  grad.addColorStop(1.0, '#e64a19');
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, 2, 512);
   const skyTex = new THREE.CanvasTexture(skyCanvas);
   skyTex.magFilter = THREE.LinearFilter;
   scene.background = skyTex;
 
-  scene.fog = new THREE.FogExp2(0x0a0a1e, 0.008);
+  scene.fog = new THREE.Fog(0xc8a882, 45, 80);
 
   // Cinematic camera
   camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 200);
@@ -103,11 +105,11 @@ export function initScene(canvas) {
 
 // ── GTA Lighting (sunset/night cinematic) ────────────────────
 function buildLighting() {
-  scene.add(new THREE.AmbientLight(0x0a0a2e, 0.35));
+  scene.add(new THREE.AmbientLight(0xfff0d6, 0.5));
 
-  // Sunset directional — low angle orange
-  const sunset = new THREE.DirectionalLight(0xff6b35, 0.6);
-  sunset.position.set(-20, 6, 15);
+  // Golden hour sun — warm bright low angle
+  const sunset = new THREE.DirectionalLight(0xffcc80, 1.0);
+  sunset.position.set(-20, 8, 15);
   sunset.castShadow = true;
   sunset.shadow.mapSize.set(2048, 2048);
   sunset.shadow.camera.near = 0.5;
@@ -118,15 +120,19 @@ function buildLighting() {
   sunset.shadow.radius = 3;
   scene.add(sunset);
 
-  // Cool blue fill from opposite side
-  const blueFill = new THREE.DirectionalLight(0x2040a0, 0.25);
-  blueFill.position.set(15, 12, -10);
+  // Sky fill from opposite side — soft blue
+  const blueFill = new THREE.DirectionalLight(0x87ceeb, 0.35);
+  blueFill.position.set(15, 15, -10);
   scene.add(blueFill);
 
-  // Overhead moon
-  const moon = new THREE.DirectionalLight(0xc0c8e0, 0.15);
-  moon.position.set(0, 30, -5);
-  scene.add(moon);
+  // Overhead sky light — bright
+  const skyLight = new THREE.DirectionalLight(0xffffff, 0.3);
+  skyLight.position.set(0, 30, -5);
+  scene.add(skyLight);
+
+  // Hemisphere — sky blue / warm ground bounce
+  const hemi = new THREE.HemisphereLight(0x87ceeb, 0xd4a06a, 0.4);
+  scene.add(hemi);
 
   // Neon pools on ground
   const neonLights = [
@@ -149,7 +155,7 @@ function buildGround() {
   // Main ground — dark concrete compound
   const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(80, 80),
-    new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.95, metalness: 0.05 })
+    new THREE.MeshStandardMaterial({ color: 0x4a6a3a, roughness: 0.9, metalness: 0.05 })
   );
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
@@ -158,7 +164,7 @@ function buildGround() {
   // Parking lot / compound floor — smooth concrete
   const compound = new THREE.Mesh(
     new THREE.PlaneGeometry(40, 35),
-    new THREE.MeshStandardMaterial({ color: 0x3a3a3a, roughness: 0.8, metalness: 0.1 })
+    new THREE.MeshStandardMaterial({ color: 0x8a8a82, roughness: 0.75, metalness: 0.1 })
   );
   compound.rotation.x = -Math.PI / 2;
   compound.position.set(0, 0.01, -2);
@@ -167,7 +173,7 @@ function buildGround() {
   // Road in front
   const road = new THREE.Mesh(
     new THREE.PlaneGeometry(80, 10),
-    new THREE.MeshStandardMaterial({ color: ASPHALT, roughness: 0.85, metalness: 0.05 })
+    new THREE.MeshStandardMaterial({ color: 0x444444, roughness: 0.85, metalness: 0.05 })
   );
   road.rotation.x = -Math.PI / 2;
   road.position.set(0, 0.02, 18);
@@ -223,11 +229,11 @@ function buildMainBuilding() {
 
   // Main tower — dark glass skyscraper style
   const towerMat = new THREE.MeshPhysicalMaterial({
-    color: DARK_GLASS,
+    color: 0x2a4a5a,
     roughness: 0.05,
-    metalness: 0.9,
+    metalness: 0.85,
     transparent: true,
-    opacity: 0.85,
+    opacity: 0.8,
     reflectivity: 1.0,
   });
   const tower = new THREE.Mesh(new THREE.BoxGeometry(28, 14, 16), towerMat);
@@ -338,9 +344,9 @@ function buildMainBuilding() {
         const glow = new THREE.Mesh(
           new THREE.PlaneGeometry(2.5, 2),
           new THREE.MeshBasicMaterial({
-            color: Math.random() > 0.7 ? 0xffa500 : 0xffe8c0,
+            color: Math.random() > 0.6 ? 0xffcc80 : 0xc8e8ff,
             transparent: true,
-            opacity: 0.03 + Math.random() * 0.04,
+            opacity: 0.04 + Math.random() * 0.05,
           })
         );
         glow.position.set(x, y + 0.5, -5.94);
@@ -890,17 +896,17 @@ function buildStars() {
 // ── Distant Skyline ──────────────────────────────────────────
 function buildDistantSkyline() {
   const buildingData = [
-    { x: -35, z: -30, w: 4, h: 20, d: 4, color: 0x0a0a1a },
-    { x: -28, z: -35, w: 5, h: 28, d: 5, color: 0x0a0a2a },
-    { x: -20, z: -32, w: 3, h: 15, d: 3, color: 0x0a0a1e },
-    { x: 20, z: -32, w: 4, h: 22, d: 4, color: 0x0a0a2a },
-    { x: 28, z: -35, w: 5, h: 32, d: 5, color: 0x0a0a1a },
-    { x: 35, z: -30, w: 3, h: 18, d: 3, color: 0x0a0a1e },
-    { x: -32, z: -38, w: 6, h: 25, d: 6, color: 0x050510 },
-    { x: 32, z: -38, w: 6, h: 20, d: 6, color: 0x050510 },
-    { x: 0, z: -40, w: 4, h: 35, d: 4, color: 0x0a0a2a },
-    { x: -10, z: -38, w: 5, h: 24, d: 4, color: 0x080818 },
-    { x: 10, z: -38, w: 5, h: 27, d: 4, color: 0x080818 },
+    { x: -35, z: -30, w: 4, h: 20, d: 4, color: 0x6a7a8a },
+    { x: -28, z: -35, w: 5, h: 28, d: 5, color: 0x5a6a7a },
+    { x: -20, z: -32, w: 3, h: 15, d: 3, color: 0x7a8a9a },
+    { x: 20, z: -32, w: 4, h: 22, d: 4, color: 0x5a6a7a },
+    { x: 28, z: -35, w: 5, h: 32, d: 5, color: 0x6a7a8a },
+    { x: 35, z: -30, w: 3, h: 18, d: 3, color: 0x7a8a9a },
+    { x: -32, z: -38, w: 6, h: 25, d: 6, color: 0x4a5a6a },
+    { x: 32, z: -38, w: 6, h: 20, d: 6, color: 0x4a5a6a },
+    { x: 0, z: -40, w: 4, h: 35, d: 4, color: 0x5a6a7a },
+    { x: -10, z: -38, w: 5, h: 24, d: 4, color: 0x6a7888 },
+    { x: 10, z: -38, w: 5, h: 27, d: 4, color: 0x6a7888 },
   ];
 
   buildingData.forEach(({ x, z, w, h, d, color }) => {
@@ -918,9 +924,9 @@ function buildDistantSkyline() {
           const win = new THREE.Mesh(
             new THREE.PlaneGeometry(0.6, 0.8),
             new THREE.MeshBasicMaterial({
-              color: Math.random() > 0.3 ? 0xffe8c0 : 0x80c0ff,
+              color: Math.random() > 0.5 ? 0xffe8c0 : 0xa0d0ff,
               transparent: true,
-              opacity: 0.06 + Math.random() * 0.06,
+              opacity: 0.08 + Math.random() * 0.08,
             })
           );
           win.position.set(x + wx, wy, z + d/2 + 0.01);
