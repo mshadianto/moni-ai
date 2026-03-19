@@ -193,41 +193,87 @@ function showAgentModal(agent) {
     [STATUS.OFFLINE]: '#333',
   }[agent.status] || '#666';
 
+  const tierLabel = { [TIER.EXECUTIVE]: 'C-SUITE EXECUTIVE', [TIER.DIRECTOR]: 'SENIOR DIRECTOR', [TIER.LEAD]: 'TEAM LEAD' }[agent.tier] || agent.tier;
+  const statusLabel = { [STATUS.ACTIVE]: 'ONLINE', [STATUS.PROCESSING]: 'PROCESSING', [STATUS.IDLE]: 'STANDBY', [STATUS.ALERT]: 'ALERT', [STATUS.OFFLINE]: 'OFFLINE' }[agent.status] || 'UNKNOWN';
+  const recentActs = (registry._activityTemplates || []).filter(a => a.agent === agent.id).slice(0, 4);
+
   modalContentEl.innerHTML = `
-    <div class="modal-header" style="border-color:${agent.color}">
-      <div class="modal-avatar" style="background:radial-gradient(circle,${agent.color}44,${agent.color}11);border-color:${agent.color}">
-        <span class="modal-emoji">${agent.emoji}</span>
-      </div>
-      <div class="modal-title-block">
-        <h2 class="modal-agent-name" style="color:${agent.color}">${agent.name}</h2>
-        <p class="modal-agent-title">${agent.title}</p>
-        <p class="modal-agent-role">${agent.role}</p>
-      </div>
-      <div class="modal-status-badge" style="background:${statusColor}22;border-color:${statusColor};color:${statusColor}">
-        ${agent.status.toUpperCase()}
+    <div class="modal-hero" style="background:linear-gradient(135deg, ${agent.color}15, ${agent.color}05)">
+      <div class="modal-hero-top">
+        <div class="modal-avatar-lg" style="border-color:${agent.color}; box-shadow: 0 0 24px ${agent.color}44">
+          <span class="modal-emoji-lg">${agent.emoji}</span>
+        </div>
+        <div class="modal-hero-info">
+          <h2 class="modal-name-lg" style="color:${agent.color}">${agent.name}</h2>
+          <p class="modal-title-lg">${agent.title}</p>
+          <p class="modal-role-lg">${agent.role}</p>
+        </div>
+        <div class="modal-hero-right">
+          <div class="modal-status-pill" style="background:${statusColor}22;border-color:${statusColor};color:${statusColor}">
+            <span class="status-dot-sm" style="background:${statusColor}"></span>
+            ${statusLabel}
+          </div>
+          <div class="modal-tier-pill">${tierLabel}</div>
+        </div>
       </div>
     </div>
-    <div class="modal-body">
-      <p class="modal-description">${escapeHtml(agent.description)}</p>
-      <div class="modal-metrics">
-        <div class="metric-card">
-          <span class="metric-value" style="color:${agent.color}">${agent.metrics.tasksToday}</span>
-          <span class="metric-label">TASKS TODAY</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-value" style="color:${agent.color}">${agent.metrics.uptime}</span>
-          <span class="metric-label">UPTIME</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-value" style="color:${agent.color}">${agent.metrics.latency}</span>
-          <span class="metric-label">LATENCY</span>
+
+    <div class="modal-body-lg">
+      <div class="modal-section-block">
+        <div class="section-title">DESCRIPTION</div>
+        <p class="modal-desc-lg">${escapeHtml(agent.description)}</p>
+      </div>
+
+      <div class="modal-section-block">
+        <div class="section-title">PERFORMANCE</div>
+        <div class="modal-metrics-lg">
+          <div class="metric-card-lg">
+            <span class="metric-icon-lg">📋</span>
+            <div class="metric-data">
+              <span class="metric-val-lg" style="color:${agent.color}">${agent.metrics.tasksToday}</span>
+              <span class="metric-lbl-lg">Tasks Today</span>
+            </div>
+          </div>
+          <div class="metric-card-lg">
+            <span class="metric-icon-lg">⏱️</span>
+            <div class="metric-data">
+              <span class="metric-val-lg" style="color:${agent.color}">${agent.metrics.uptime}</span>
+              <span class="metric-lbl-lg">Uptime</span>
+            </div>
+          </div>
+          <div class="metric-card-lg">
+            <span class="metric-icon-lg">⚡</span>
+            <div class="metric-data">
+              <span class="metric-val-lg" style="color:${agent.color}">${agent.metrics.latency}</span>
+              <span class="metric-lbl-lg">Latency</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal-meta">
-        <div class="meta-row"><span class="meta-key">MODEL</span><span class="meta-value">${agent.model}</span></div>
-        <div class="meta-row"><span class="meta-key">TIER</span><span class="meta-value">${agent.tier.toUpperCase()}</span></div>
-        <div class="meta-row"><span class="meta-key">POSITION</span><span class="meta-value">X:${agent.position.x} Z:${agent.position.z}</span></div>
-        <div class="meta-row"><span class="meta-key">QUALITY</span><span class="meta-value">${renderPipeline.quality.toUpperCase()}</span></div>
+
+      <div class="modal-section-block">
+        <div class="section-title">RECENT ACTIVITY</div>
+        <div class="modal-feed-lg">
+          ${recentActs.map(a => `
+            <div class="feed-item-lg feed-${a.type}">
+              <span class="feed-dot-lg"></span>
+              <span class="feed-msg-lg">${escapeHtml(a.message)}</span>
+            </div>
+          `).join('')}
+          ${recentActs.length === 0 ? '<div class="feed-item-lg"><span class="feed-msg-lg" style="opacity:0.4">No recent activity</span></div>' : ''}
+        </div>
+      </div>
+
+      <div class="modal-section-block">
+        <div class="section-title">SYSTEM INFO</div>
+        <div class="modal-info-grid">
+          <div class="info-row"><span class="info-key">AI MODEL</span><span class="info-val">${agent.model}</span></div>
+          <div class="info-row"><span class="info-key">TIER</span><span class="info-val">${tierLabel}</span></div>
+          <div class="info-row"><span class="info-key">INTENSITY</span><span class="info-val">${agent.glowIntensity}x</span></div>
+          <div class="info-row"><span class="info-key">POSITION</span><span class="info-val">X: ${agent.position.x} &nbsp;|&nbsp; Z: ${agent.position.z}</span></div>
+          <div class="info-row"><span class="info-key">DESK</span><span class="info-val">${agent.deskSize.w} × ${agent.deskSize.d}</span></div>
+          <div class="info-row"><span class="info-key">RENDER</span><span class="info-val">${renderPipeline.quality.toUpperCase()} @ ${renderPipeline.fps} FPS</span></div>
+        </div>
       </div>
     </div>
   `;
