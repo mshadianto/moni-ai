@@ -20,7 +20,7 @@
 
   <!-- Boot Sequence -->
   <div class="boot-overlay">
-    <div class="boot-text">INITIALIZING MONI 3D WORKSPACE v1.0 ...</div>
+    <div class="boot-text">INITIALIZING MONI 3D WORKSPACE v2.0 ...</div>
   </div>
 
   <!-- 3D Canvas -->
@@ -39,9 +39,12 @@
   <!-- HUD -->
   <div class="hud">
 
-    <!-- Top Bar: Title + Stats + Clock -->
+    <!-- Top Bar -->
     <div class="hud-top">
-      <div id="hud-title" style="min-width: 200px;">&nbsp;</div>
+      <div class="hud-title-section">
+        <div id="hud-title" style="min-width: 200px;">&nbsp;</div>
+        <span id="conn-status" class="conn-badge conn-sim" title="Gateway connection">SIM</span>
+      </div>
 
       <div class="hud-stats">
         <div class="stat-item">
@@ -63,6 +66,7 @@
       </div>
 
       <div class="hud-clock-section">
+        <span id="fps-counter" class="fps-counter">-- FPS</span>
         <span id="hud-clock">00:00:00</span>
         <button class="btn-reset" id="reset-camera" title="Reset camera to overview">OVERVIEW</button>
       </div>
@@ -76,7 +80,10 @@
 
     <!-- Bottom Panel: Activity Feed -->
     <div class="hud-bottom">
-      <div class="panel-header">LIVE ACTIVITY</div>
+      <div class="panel-header">
+        LIVE ACTIVITY
+        <span class="feed-mode-indicator" id="feed-mode"></span>
+      </div>
       <div id="activity-feed"></div>
     </div>
 
@@ -85,7 +92,7 @@
   <!-- Agent Detail Modal -->
   <div class="agent-modal" id="agent-modal">
     <div class="modal-panel">
-      <button class="modal-close" id="modal-close" title="Close">&times;</button>
+      <button class="modal-close" id="modal-close" title="Close [ESC]">&times;</button>
       <div id="modal-content"></div>
     </div>
   </div>

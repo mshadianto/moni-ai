@@ -668,6 +668,67 @@ html, body {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* ── Title Section ────────────────────────────────────────── */
+.hud-title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Connection Badge ─────────────────────────────────────── */
+.conn-badge {
+  font-family: var(--font-display);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 2px 8px;
+  border-radius: var(--panel-radius);
+  border: 1px solid;
+  user-select: none;
+}
+
+.conn-live {
+  color: var(--neon);
+  border-color: var(--neon);
+  background: rgba(0, 255, 159, 0.1);
+  box-shadow: 0 0 6px rgba(0, 255, 159, 0.2);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+.conn-sim {
+  color: var(--gold);
+  border-color: rgba(255, 217, 61, 0.4);
+  background: rgba(255, 217, 61, 0.06);
+}
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ── FPS Counter ──────────────────────────────────────────── */
+.fps-counter {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(78, 205, 196, 0.4);
+  letter-spacing: 1px;
+  min-width: 50px;
+  text-align: right;
+}
+
+/* ── Feed Mode Indicator ──────────────────────────────────── */
+.feed-mode-indicator {
+  font-size: 8px;
+  opacity: 0.4;
+  margin-left: 8px;
+}
+
+/* ── Agent Status: Offline ────────────────────────────────── */
+.agent-status-dot.offline {
+  background: #333;
+  border: 1px solid #555;
+}
+
 /* ── Corner Decorations ───────────────────────────────────── */
 .corner-tl, .corner-tr, .corner-bl, .corner-br {
   position: fixed;
